@@ -38,7 +38,6 @@ class Recipe(models.Model):
     )
     ingredients = models.ManyToManyField(
         Ingredient,
-        related_name='posts',
         blank=True
     )
 
