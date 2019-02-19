@@ -1,0 +1,7 @@
+Venv
+ENV
+*.pyc
+*.idea
+*.sqlite3
+*.swp
+core
