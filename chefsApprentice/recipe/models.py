@@ -36,6 +36,9 @@ class Recipe(models.Model):
     description = models.TextField(
         blank=False,
     )
+    instuction = models.TextField(
+        blank=False,
+    )
     ingredients = models.ManyToManyField(
         Ingredient,
         blank=True
