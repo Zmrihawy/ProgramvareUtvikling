@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="row">
+    <div class="col-sm">
+        <h1 style="margin-top: 150px; font-weight: 600; font-family:hco gotham ssm,helvetica neue,Helvetica,Arial,sans-serif;"> Eat Your Food!</h1>
+        <h5 style="margin-top: 10px; font-family:hco gotham ssm,helvetica neue,Helvetica,Arial,sans-serif;">We have the worlds largest repository of good stuff. Check it out!</h5>
+
+        <form class="form-inline ml-auto mt-4">
+          <div class="md-form my-0" id="searchbar" style="width:375px";>
+            <input class="form-control" type="text" placeholder="Search" aria-label="Search" style="width:375px">
+          </div>
+          <button href="#!" class="btn btn-success btn-md my-0 ml-sm-2" type="submit">Search</button>
+        </form>
+    </div>
+
+        <div class="col-sm" style="padding-right: 0px;">
+            <div class="d-none d-lg-block">
+                <img class="hidden-xs-down img" src="{% static "browse/images/frontpage.png" %}" style="width:80%" align="right">
+            </div>
+        </div>
+      </div>
+{% endblock content %}
+
