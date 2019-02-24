@@ -337,3 +337,4 @@ fabric.properties
 .venv/
 
 # End of https://www.gitignore.io/api/macos,emacs,django,python,pycharm
+chefsApprentice/.idea/workspace.xml
