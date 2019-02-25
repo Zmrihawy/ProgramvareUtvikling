@@ -3,5 +3,7 @@ from . import views
 
 app_name = 'browse'
 urlpatterns = [
-    path('', views.browse, name='browse'),
+    path('contribute/', views.contribute, name='contribute'),
+    path('browse/', views.browse, name='browse'),
+    path('browsepage/', views.browsepage, name='browsepage'),
 ]
