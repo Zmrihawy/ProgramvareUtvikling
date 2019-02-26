@@ -1,28 +1,28 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <h1>Add a new recipie</h1>
+    <h1>Add a new recipe</h1>
 
 <form>
   <div class="form-group w-25">
-    <label for="exampleInputEmail1">Name</label>
+    <label for="name">Name</label>
     <input type="text" class="form-control" placeholder="Enter name">
     <small class="form-text text-muted">Please enter the name of the dish</small>
   </div>
 
   <div class="form-group">
-    <label for="exampleFormControlTextarea1">Description</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <label for="description">Description</label>
+    <textarea class="form-control" id="description" rows="3"></textarea>
   </div>
 
     <div class="form-group">
-    <label for="exampleFormControlTextarea1">Instruction</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <label for="instruction">Instruction</label>
+    <textarea class="form-control" id="instruction" rows="3"></textarea>
   </div>
 
     <div class="Ingredients">
     <label>Ingredients</label>
-    <input type="Ingredients" class="form-control" placeholder="Enter Ingredients">
+    <textarea class="form-control" id="ingredients" rows="3" placeholder="Enter ingredients"></textarea>
   </div>
 
   <div class="mt-4 mb-5">
