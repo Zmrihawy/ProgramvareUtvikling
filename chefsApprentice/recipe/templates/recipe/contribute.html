@@ -3,7 +3,7 @@
 {% block content %}
     <h1>Add a new recipe</h1>
 
-<form>
+<!--<form>
   <div class="form-group w-25">
     <label for="name">Name</label>
     <input type="text" class="form-control" placeholder="Enter name">
@@ -30,7 +30,20 @@
     <input type="file" class="form-control-file" id="exampleFormControlFile1">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+</form>-->
+    <form method="post">
+        {% csrf_token %}
+        <!-- form.as_p links the django form from forms.py-->
+        {{ form.as_p }}
+        <div class="Ingredients">
+    <label>Ingredients</label>
+    <textarea class="form-control" id="ingredients" rows="3" placeholder="Enter ingredients"></textarea>
+  </div>
+
+        <button type="submit">Submit</button>
+
+    </form>
+</div>
 
 {% endblock content %}
 
