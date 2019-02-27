@@ -9,7 +9,7 @@
             <div class="card mb-4">
                 <img class="card-img-top img-fluid" src="{% static "browse/images/example.png" %}" alt="Card image cap">
                 <div class="card-body">
-                    <h4 class="card-title">{{ recipe.name }}</h4>
+                    <h4 class="card-title"><a href="{% url 'recipe:recipe-detail' recipe.id %}">{{ recipe.name }}</a></h4>
                     <h6 class="card-text">{{ recipe.description }}</h6>
                     <p class="card-text"><small class="text-muted">{{ recipe.user }}</small></p>
                 </div>
@@ -23,7 +23,6 @@
 
         {% endfor %}
 
-        <div col="col-1"></div>
     </div>
 </div>
 
