@@ -8,11 +8,11 @@ class IngredientForm(forms.ModelForm):
 
 class RecipeForm(forms.ModelForm):
     #user = forms.ModelChoiceField(User)
-    name = forms.CharField(max_length=100)
-    description = forms.CharField(widget=forms.Textarea)
-    instruction = forms.CharField(widget=forms.Textarea)
+    #name = forms.CharField(max_length=100)
+    #description = forms.CharField(widget=forms.Textarea)
+    #instruction = forms.CharField(widget=forms.Textarea)
     #ingredients = forms.ModelMultipleChoiceField(Ingredient)
-    #image = forms.ImageField()
+    image = forms.ImageField()
 
     class Meta:
         model = Recipe

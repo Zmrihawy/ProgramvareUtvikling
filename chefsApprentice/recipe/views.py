@@ -8,7 +8,7 @@ from .forms import RecipeForm
 class RecipeCreateView(CreateView):
     template_name = "recipe/contribute.html"
     model = Recipe
-    fields = ['name', 'description','instruction','ingredients']
+    fields = ['name', 'description','instruction','ingredients','image']
 
     def form_valid(self, form):
         form.instance.user = self.request.user #Så langt kom jeg, må fortsatt endre html så denne referer til feltene over -Torstein

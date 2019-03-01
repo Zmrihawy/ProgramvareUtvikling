@@ -31,17 +31,13 @@
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>-->
-    <form method="post">
+
+<div>
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <!-- form.as_p links the django form from forms.py-->
         {{ form.as_p }}
-        <div class="Ingredients">
-    <label>Ingredients</label>
-    <textarea class="form-control" id="ingredients" rows="3" placeholder="Enter ingredients"></textarea>
-  </div>
-
         <button type="submit">Submit</button>
-
     </form>
 </div>
 

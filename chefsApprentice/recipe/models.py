@@ -43,7 +43,7 @@ class Recipe(models.Model):
         Ingredient,
         blank=True,
     )
-    image = models.ImageField(upload_to='recipe_image', blank=True)
+    image = models.ImageField(default="default.png", upload_to='recipe_image')
 
     def __str__(self):
         return self.name
