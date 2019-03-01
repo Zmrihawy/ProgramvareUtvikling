@@ -9,11 +9,9 @@ from .forms import RecipeForm, IngredientForm
 class RecipeCreateView(CreateView):
     template_name = "recipe/add_recipe.html"
     model = Recipe
-<<<<<<< HEAD
-    fields = ['name', 'description','instruction','ingredients','image']
-=======
+
     fields = ['name', 'description', 'instruction', 'ingredients', 'image']
->>>>>>> a0b1536a707065c1474366c97b2b5895af7acc22
+
 
     #def form_valid(self, form):
     #    form.instance.user = self.request.user #Så langt kom jeg, må fortsatt endre html så denne referer til feltene over -Torstein

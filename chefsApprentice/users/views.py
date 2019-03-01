@@ -19,10 +19,11 @@ def register(request):
                 user1.groups.add(user_group)
             else:
                 user1.groups.add(chef_group)
-        return redirect('/browse')
+        return redirect('/')
 
     else:
         form = UserRegisterForm()
+
     return render(request, 'users/register.html', {'form': form})
 
 

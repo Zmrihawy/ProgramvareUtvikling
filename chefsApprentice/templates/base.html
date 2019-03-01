@@ -35,7 +35,7 @@
                     <li class="nav-item">
                     <a class="nav-link" href="#">Sign in</a>
                   </li>
-                    <button class="btn btn-outline-success ml-2 my-2 my-sm-0" type="submit">Join</button>
+                    <a class="btn btn-outline-success ml-2 my-2 my-sm-0" href="{% url "users:register" %}" type="submit">Join</a>
                 </ul>
             </div>
 
@@ -43,7 +43,7 @@
 
         </nav>
 
-            <div class="container" style="margin-right: 0px;padding-right: 0px;">
+            <div>
                   {% if messages %}
                     {%for message in messages %}
               <div class = "alert alert-{{message.tags}}">
@@ -55,10 +55,6 @@
             </div>
 
 
-
-        <div>
-          {% block content %}{% endblock content %}
-        </div>
 
     </div>
 

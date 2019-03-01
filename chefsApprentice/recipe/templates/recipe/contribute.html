@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <h1>Add a new recipe</h1>
 
 <!--<form>
   <div class="form-group w-25">
@@ -34,27 +31,14 @@
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>-->
 
-<div>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <!-- form.as_p links the django form from forms.py-->
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
-</div>
-=======
-=======
 
->>>>>>> 508bbc5ecadd5803d8f11b9eac056500371b2d0b
+
 <div class="add-buttons">
-          <a class="gray button desc" href="/add_recipe">
-            Add Recipe
-          </a>
-          <a class="gray button desc" href="/add_ingredient">
-            Add Ingredient
-          </a>
-        </div>
->>>>>>> a0b1536a707065c1474366c97b2b5895af7acc22
+
+          <a class="gray button desc" href="/add_recipe"><h1>Add Recipe</h1></a>
+          <a class="gray button desc" href="/add_ingredient"><h1>Add Ingredient</h1></a>
+</div>
+
 
 {% endblock content %}
 

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
 {% block content %}
 <div class="container">
     <div class="row">
@@ -8,11 +9,7 @@
         {% for recipe in recipes %}
         <div class="col-md-3">
             <div class="card mb-4">
-<<<<<<< HEAD
                 <img class="card-img-top img-fluid" src="{{ recipe.image.url }}" alt="Card image cap">
-=======
-                <img class="card-img-top img-fluid" src="{{MEDIA_ROOT}}{{ recipe.image.url }}" alt="Card image cap">
->>>>>>> a0b1536a707065c1474366c97b2b5895af7acc22
                 <div class="card-body">
                     <h4 class="card-title"><a href="{% url 'recipe:recipe-detail' recipe.id %}">{{ recipe.name }}</a></h4>
                     <h6 class="card-text">{{ recipe.description }}</h6>
