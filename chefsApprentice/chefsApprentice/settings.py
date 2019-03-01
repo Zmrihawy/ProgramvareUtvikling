@@ -136,5 +136,11 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'chefsApprentice/media')
 
+
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+<<<<<<< HEAD
 >>>>>>> a0b1536a707065c1474366c97b2b5895af7acc22
+=======
+
+>>>>>>> 508bbc5ecadd5803d8f11b9eac056500371b2d0b

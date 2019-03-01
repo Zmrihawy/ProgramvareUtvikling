@@ -71,4 +71,3 @@ class ContributeCreateView(CreateView):
     def get(self, request):
         return render(request, self.template_name)
 
-
