@@ -6,7 +6,14 @@ from django.db.models import Q
 # Create your views here.
 
 def browse(request):
-    return render(request, 'browse/browse.html')
+    # added functionality to show all recipes in random sequence
+    recipes_rand = list(Recipe.objects.all())
+    from random import shuffle
+    shuffle(recipes_rand)
+    context = {
+        'recipes': recipes_rand,
+    }
+    return render(request, 'browse/browse.html', context)
 
 def browsepage(request):
     context = {
