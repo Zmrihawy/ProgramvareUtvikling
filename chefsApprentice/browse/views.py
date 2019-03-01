@@ -18,8 +18,17 @@ def searchresults(request):
     query = request.GET.get('q')
     results = Recipe.objects.filter(Q(ingredients__name__icontains=query))
 
+
+    #context = {
+    #    'recipes': results
+    #}
+    # Funksjon for å søke på det som står i søkefeltet
+    results = list(dict.fromkeys(results))
+
     context = {
-        'recipes': results
+        'recipes': results,
+        'ingredient': query,
+
     }
     return render(request, 'browse/searchresults.html', context)
 
