@@ -22,4 +22,6 @@ urlpatterns = [
     path('', include('recipe.urls')),
     path('', include('browse.urls')),
     path('admin/', admin.site.urls),
+    path('register/', user_views.register, name='register')
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
