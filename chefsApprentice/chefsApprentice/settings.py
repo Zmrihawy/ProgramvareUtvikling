@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'users.apps.UsersConfig',
+    'crispy_forms',
     'browse.apps.BrowseConfig',
     'recipe.apps.RecipeConfig',
     'django.contrib.admin',
@@ -129,3 +131,10 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+<<<<<<< HEAD
+=======
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'chefsApprentice/media')
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+>>>>>>> a0b1536a707065c1474366c97b2b5895af7acc22

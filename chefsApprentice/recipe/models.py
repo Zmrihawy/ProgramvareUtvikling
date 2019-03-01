@@ -41,7 +41,7 @@ class Recipe(models.Model):
     )
     ingredients = models.ManyToManyField(
         Ingredient,
-        blank=True,
+        blank=True
     )
     image = models.ImageField(default="default.png", upload_to='recipe_image')
 
