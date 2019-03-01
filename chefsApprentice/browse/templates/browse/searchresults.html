@@ -8,6 +8,7 @@
         <div class="col-md-3">
             <div class="card mb-4">
                 <img class="card-img-top img-fluid" src="{% static "browse/images/example.png" %}" alt="Card image cap">
+                <img class="card-img-top img-fluid" src="{{MEDIA_ROOT}}{{ recipe.image.url }}" alt="Card image cap">
                 <div class="card-body">
                     <h4 class="card-title">{{ recipe.name }}</h4>
                     <h6 class="card-text">{{ recipe.description }}</h6>
