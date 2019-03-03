@@ -43,6 +43,19 @@ class RecipeDetailView(DetailView):
     model = Recipe
 
 
+
+#class RecipeEditView(UpdateView):
+#    model = Recipe
+
+#    template_name = "recipe/recipe_edit.html"
+
+#    def get_object(self, *args, **kwargs):
+#        recipe = get_object_or_404(Recipe, pk=self.kwargs['pk'])
+
+#        return recipe.
+
+
+
 class IngredientCreateView(CreateView):
     template_name = "recipe/add_ingredient.html"
     model = Ingredient
