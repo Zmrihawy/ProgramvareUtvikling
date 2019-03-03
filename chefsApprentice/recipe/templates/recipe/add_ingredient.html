@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1>Add a new ingredient</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <!-- form.as_p links the django form from forms.py-->
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+
+    </form>
+</div>
+
+{% endblock content %}

@@ -7,10 +7,10 @@
         <h1>{{ object.name }}</h1>
         <label class="mt-3" for="description">Description:</label>
 
-        <textarea readonly class="form-control" id="description" rows="3">{{ object.description }}</textarea>
+        <textarea id="description" rows="3">{{ object.description }}</textarea>
 
         <label class="mt-3" for="instruction">Instructions:</label>
-        <textarea readonly class="form-control" id="instruction" rows="5">{{ object.instruction }}</textarea>
+        <textarea id="instruction" rows="5">{{ object.instruction }}</textarea>
 
         <label class="mt-5" for="ingredients">Ingredients:</label>
         <div class="row pl-3 pr-5 mr-4 col-6">
@@ -27,4 +27,3 @@
         </div>
 </div>
 {% endblock content %}
-
