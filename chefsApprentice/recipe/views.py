@@ -30,8 +30,12 @@ class RecipeCreateView(CreateView):
             #post.user = request.user
             # saves the form to the database
             post.save()
-            text = form.cleaned_data['name']
-            form = RecipeForm()
+            name = form.cleaned_data['name']
+
+            ingredients = form.cleaned_data.get('ingredients')
+            for ingredient in ingredients:
+                post.ingredients.add(ingredient)
+
             # redirects to the browsepage
             return redirect('/browsepage')
 
