@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+<<<<<<< Updated upstream
 {% block content %}
     <h2>You have been logged out</h2>
 
@@ -8,4 +9,16 @@
                 </small>
             </div>
         </div>
+=======
+
+{% block content %}
+
+    <div class="container">
+        <small class="text-center pt-3">
+            <h2>You have been signed out</h2>
+            <div class="text-muted" ><a href="{% url 'users:login' %}">Sign In Again</a></div>
+        </small>
+    </div>
+
+>>>>>>> Stashed changes
 {% endblock content %}
