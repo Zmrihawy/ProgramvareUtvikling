@@ -32,8 +32,16 @@
     </div>
 
 </div>
+
 {% endif %}
+{% if recipe.user == request.user or user.is_superuser%}
+<div class="container">
+    <div class="add-buttons">
+              <a class="gray button desc" href="{% url 'recipe:recipe-update' recipe.id %}"><h1>Update recipe</h1></a>
+    </div>
 
 </div>
+</div>
+    {% endif %}
 {% endblock content %}
 
