@@ -1,8 +1,11 @@
 from django.views.generic import CreateView, DetailView
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView, DeleteView
 from .models import Recipe, Ingredient
 from .forms import RecipeForm, IngredientForm
+from django.urls import reverse_lazy
+from django.core.exceptions import PermissionDenied
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 
@@ -57,6 +60,22 @@ class RecipeDetailView(DetailView):
 #        recipe = get_object_or_404(Recipe, pk=self.kwargs['pk'])
 
 #        return recipe.
+
+
+class RecipeDeleteView(LoginRequiredMixin, DeleteView):
+    model = Recipe
+
+    def dispatch(self, request, *args, **kwargs):
+        user = request.user
+        recipe = self.get_object()
+        success_url = self.get_success_url()
+        if not (recipe.user == user or user.is_superuser):
+            raise PermissionDenied
+        return super(RecipeDeleteView,self).dispatch(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse_lazy('browse:browsepage')
+
 
 
 
