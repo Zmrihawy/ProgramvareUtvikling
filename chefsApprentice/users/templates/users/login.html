@@ -1,27 +1,11 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<<<<<<< Updated upstream
     <div class ="content-section mx-5 w-50">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Log In</legend>
-                {{form|crispy}}
-            </fieldset>
             <!--<label>user</label>
             <input type="radio" name = "user"/>
             <label>chef</label>
             <input type="radio" name = "chef"/>-->
-        <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Log In</button>
-        </div>
-        </form>
-            <div class="border-top pt-3">
-                <small class="text-muted">
-                    Need An Account? <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
-                </small>
-=======
     <div class ="container w-50">
         <form method="POST">
             {% csrf_token %}
@@ -35,7 +19,8 @@
         </form>
             <div class="text-center pt-3">
                 <small class="text-muted">Need An Account?<a class="ml-1" href="{% url 'users:register' %}">Sign Up Now</a></small>
->>>>>>> Stashed changes
             </div>
         </div>
+            </div>
+    </div>
 {% endblock content %}
