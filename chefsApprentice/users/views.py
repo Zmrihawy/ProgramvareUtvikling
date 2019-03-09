@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from recipe.models import Recipe, Ingredient
 from .forms import UserRegisterForm
 
 from django.contrib.auth.models import Group
@@ -29,7 +30,12 @@ def register(request):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    recipes = Recipe.objects.filter(user=request.user)
+    context = {
+        'recipes': recipes
+
+    }
+    return render(request, 'users/profile.html', context)
 
 #chef_group = Group.objects.create(name = 'chef')
             #user_group = Group.objects.create(name = 'user')
