@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from recipe.models import Recipe, Ingredient
+from django.contrib.auth.models import User
 from .forms import UserRegisterForm
+
+
+import csv, io
 
 from django.contrib.auth.models import Group
 
@@ -28,6 +32,7 @@ def register(request):
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
 
+
 @login_required
 def profile(request):
     recipes = Recipe.objects.filter(user=request.user)
@@ -48,3 +53,61 @@ def profile(request):
 
     return render(request, 'users/profile.html')
 
+
+@permission_required('admin.can_add_log_entry')
+def recipe_upload(request):
+    template = "users/recipe_upload.html"
+
+    prompt = {
+        'order': "Order of csv should be user, name, description, instruction, ingredients and image"
+    }
+    if request.method == "GET":
+        return render(request, template, prompt)
+
+    csv_file = request.FILES['file']
+
+    if not csv_file.name.endswith('.csv'):
+        messages.error(request, "This file is not a .csv file")
+
+    data_set = csv_file.read().decode('utf-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+    for column in csv.reader(io_string, delimiter=',', quotechar='"'):
+        _, created = Recipe.objects.update_or_create(
+            user=User.objects.get(username=column[0]),
+            name=column[1],
+            description=column[2],
+            instruction=column[3],
+        )
+
+    context = {}
+    return render(request, template, context)
+
+
+@permission_required('admin.can_add_log_entry')
+def ingredient_upload(request):
+    template = "users/ingredient_upload.html"
+
+    prompt = {
+        'order': "Order of csv should be user, name and info"
+    }
+    if request.method == "GET":
+        return render(request, template, prompt)
+
+    csv_file = request.FILES['file']
+
+    if not csv_file.name.endswith('.csv'):
+        messages.error(request, "This file is not a .csv file")
+
+    data_set = csv_file.read().decode('utf-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+    for column in csv.reader(io_string, delimiter=',', quotechar="|"):
+        _, created = Ingredient.objects.update_or_create(
+            user=User.objects.get(username=column[0]),
+            name=column[1],
+            info=column[2],
+        )
+
+    context = {}
+    return render(request, template, context)

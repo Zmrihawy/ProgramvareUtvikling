@@ -43,4 +43,22 @@
 
     </div>
 
+    {% if user.is_superuser%}
+    <div class="w3-container"></div>
+    <div class="add-buttons">
+              <a class="gray button desc" href="{% url 'users:recipe-upload' %}"><h1>Import recipes</h1></a>
+    </div>
+
+
+    {% endif %}
+
+    {% if user.is_superuser%}
+    <div class="w3-container"></div>
+    <div class="add-buttons">
+              <a class="gray button desc" href="{% url 'users:ingredient-upload' %}"><h1>Import ingredients</h1></a>
+    </div>
+
+
+    {% endif %}
+
 {% endblock content %}
