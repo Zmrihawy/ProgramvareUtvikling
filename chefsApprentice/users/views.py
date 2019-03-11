@@ -72,6 +72,7 @@ def recipe_upload(request):
     data_set = csv_file.read().decode('utf-8')
     io_string = io.StringIO(data_set)
     next(io_string)
+    count = 0
     for column in csv.reader(io_string, delimiter=',', quotechar='"'):
         _, created = Recipe.objects.update_or_create(
             user=User.objects.get(username=column[0]),
@@ -79,8 +80,9 @@ def recipe_upload(request):
             description=column[2],
             instruction=column[3],
         )
-
+        count += 1
     context = {}
+    messages.success(request, f'data successfully added')
     return render(request, template, context)
 
 
