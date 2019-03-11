@@ -110,6 +110,6 @@ def ingredient_upload(request):
             name=column[1],
             info=column[2],
         )
-
+    messages.success(request, f'data successfully added')
     context = {}
     return render(request, template, context)
