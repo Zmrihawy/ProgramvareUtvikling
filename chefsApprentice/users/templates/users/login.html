@@ -1,7 +1,15 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
+<<<<<<< HEAD
 
+=======
+    <div class ="content-section mx-5 w-50">
+            <!--<label>user</label>
+            <input type="radio" name = "user"/>
+            <label>chef</label>
+            <input type="radio" name = "chef"/>-->
+>>>>>>> 24f8a7810cb88ce74620234aa8672228bf7d40d7
     <div class ="container w-50">
         <form method="POST">
             {% csrf_token %}
@@ -17,4 +25,6 @@
                 <small class="text-muted">Need An Account?<a class="ml-1" href="{% url 'users:register' %}">Sign Up Now</a></small>
             </div>
         </div>
+            </div>
+    </div>
 {% endblock content %}

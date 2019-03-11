@@ -28,6 +28,11 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="{% url "recipe:contribute" %}">Contribute<span class="sr-only">(current)</span></a>
 
+<<<<<<< HEAD
+=======
+                  </li>
+
+>>>>>>> 24f8a7810cb88ce74620234aa8672228bf7d40d7
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{% url "browse:browsepage" %}">Browse</a></li>
                     {% if user.is_authenticated %}
@@ -36,6 +41,10 @@
                     {% else %}
                         <li class="nav-item"><a class="nav-link" href="{% url "users:login" %}">Sign in</a></li>
                         <a class="btn btn-outline-success ml-2 my-2 my-sm-0" href="{% url "users:register" %}" type="submit">Join</a>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 24f8a7810cb88ce74620234aa8672228bf7d40d7
                     {% endif %}
                 </ul>
             </div>

@@ -25,6 +25,23 @@
         <div class="col-sm">
             <img class="card-img img-fluid w-75 mt-5 pt-4" src="{{ object.image.url }}" alt="Card image cap">
         </div>
+{% if recipe.user == request.user or user.is_superuser%}
+<div class="container">
+    <div class="add-buttons">
+              <a class="gray button desc" href="{% url 'recipe:recipe-delete' recipe.id %}"><h1>Delete recipe</h1></a>
+    </div>
+
 </div>
+
+{% endif %}
+{% if recipe.user == request.user or user.is_superuser%}
+<div class="container">
+    <div class="add-buttons">
+              <a class="gray button desc" href="{% url 'recipe:recipe-update' recipe.id %}"><h1>Update recipe</h1></a>
+    </div>
+
+</div>
+</div>
+    {% endif %}
 {% endblock content %}
 
