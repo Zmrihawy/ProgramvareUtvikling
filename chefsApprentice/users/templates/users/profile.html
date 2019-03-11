@@ -2,10 +2,11 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
-    <h1>{{ user.username }}</h1>
-    <h2>{{ user.first_name }}</h2>
-    <h3>{{ user.last_name }}</h3>
-    <h4>{{ user.email_address }}</h4>
+    <p>Update user info [placeholder]</p>
+    <h1>Username: {{ user.username }}</h1>
+    <h2>First name: {{ user.first_name }}</h2>
+    <h3>Last name: {{ user.last_name }}</h3>
+    <h4>Email address: {{ user.email }}</h4>
 
 {% if user.groups.all.0.name == "chef" %}
     <h5>You are a certified chef</h5>
