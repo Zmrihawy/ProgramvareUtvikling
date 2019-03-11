@@ -64,6 +64,16 @@ body {
   }
 }
 
+#recipeimg{
+    background-image:url('images/example.png');
+    width: 224px;
+    height: 230px;
+}
+
+
+
+
+
 @media only screen and (max-device-width: 500px){
     #mainlogo {
         height: 70px;

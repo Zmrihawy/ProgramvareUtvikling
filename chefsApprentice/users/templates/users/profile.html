@@ -21,7 +21,7 @@
         {% for recipe in recipes %}
         <div class="col-md-3">
             <div class="card mb-4">
-                <img class="card-img-top img-fluid" src="{{ recipe.image.url }}" alt="Card image cap">
+                <img class="card-img-top img-fluid" id="recipeimg" src="{{ recipe.image.url }}" >
                 <div class="card-body">
                     <h4 class="card-title"><a href="{% url 'recipe:recipe-detail' recipe.id %}">{{ recipe.name }}</a>
                     {% if recipe.user.groups.all.0.name == "chef" %}
