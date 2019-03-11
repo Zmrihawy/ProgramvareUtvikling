@@ -30,8 +30,8 @@
 <div class = "row ml-5">
     {% if recipe.user == request.user or user.is_superuser%}
         <div class="add-buttons">
-            <button type="button" class="btn btn-danger btn-sm" href="{% url 'recipe:recipe-delete' recipe.id %}"><h3>Delete recipe</h3></button>
-            <button type="button" class="btn btn-secondary btn-sm" href="{% url 'recipe:recipe-update' recipe.id %}"><h3>Update recipe</h3></button>
+            <a role="button" class="btn btn-danger btn-sm" href="{% url 'recipe:recipe-delete' recipe.id %}"><h3>Delete recipe</h3></a>
+            <a role="button" class="btn btn-secondary btn-sm" href="{% url 'recipe:recipe-update' recipe.id %}"><h3>Update recipe</h3></a>
 
         </div>
     {% endif %}
