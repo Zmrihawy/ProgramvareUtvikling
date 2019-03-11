@@ -14,13 +14,13 @@ class IngredientForm(forms.ModelForm):
 class RecipeForm(forms.ModelForm):
     #user = forms.ModelChoiceField(User)
 
-    name = forms.CharField(max_length=100)
-    description = forms.CharField(widget=forms.Textarea)
-    instruction = forms.CharField(widget=forms.Textarea)
-    ingredients = forms.ModelMultipleChoiceField(queryset=Ingredient.objects.all())
+    #name = forms.CharField(max_length=100)
+    #description = forms.CharField(widget=forms.Textarea)
+    #instruction = forms.CharField(widget=forms.Textarea)
+    #ingredients = forms.ModelMultipleChoiceField(queryset=Ingredient.objects.all())
     #image = forms.ImageField()
 
 
     class Meta:
         model = Recipe
-        fields = ['user', 'name', 'description', 'instruction', 'ingredients', 'image']
+        fields = ['name', 'description', 'instruction', 'ingredients', 'image']

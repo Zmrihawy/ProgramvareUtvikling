@@ -6,6 +6,8 @@ from .forms import RecipeForm, IngredientForm
 from django.urls import reverse_lazy
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
+
 # Create your views here.
 
 
@@ -30,8 +32,11 @@ class RecipeCreateView(CreateView):
             post = form.save(commit=False)
             # post_user checks which user is posting, only works for admins for now
             # left field for user in forms.py, so one can choose which user to post as
-            #post.user = request.user
             # saves the form to the database
+            if self.request.user.is_authenticated:
+                post.user = self.request.user
+            else:
+                post.user = User.objects.get(username="Unknown")
             post.save()
             name = form.cleaned_data['name']
 

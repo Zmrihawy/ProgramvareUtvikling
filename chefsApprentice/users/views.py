@@ -4,9 +4,6 @@ from django.contrib.auth.decorators import login_required, permission_required
 from recipe.models import Recipe, Ingredient
 from django.contrib.auth.models import User
 from .forms import UserRegisterForm
-<<<<<<< HEAD
-
-=======
 
 
 import csv, io
@@ -14,8 +11,6 @@ import csv, io
 from django.contrib.auth.models import Group
 
 
-
->>>>>>> 24f8a7810cb88ce74620234aa8672228bf7d40d7
 
 def register(request):
     if request.method == 'POST':
@@ -26,11 +21,7 @@ def register(request):
             groups = form.cleaned_data.get('groups')
             for group in groups:
                 user.groups.add(group)
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 24f8a7810cb88ce74620234aa8672228bf7d40d7
             messages.success(request, f'Account created for {username} you can now log in')
             return redirect('users:login')
 
@@ -42,9 +33,7 @@ def register(request):
 
 @login_required
 def profile(request):
-<<<<<<< HEAD
-    return render(request, 'users/profile.html')
-=======
+
     recipes = Recipe.objects.filter(user=request.user)
     context = {
         'recipes': recipes
@@ -121,4 +110,3 @@ def ingredient_upload(request):
 
     context = {}
     return render(request, template, context)
->>>>>>> 24f8a7810cb88ce74620234aa8672228bf7d40d7
