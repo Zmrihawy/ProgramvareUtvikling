@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row mb-3">
+    <!-- This displays how many recipes there exists from the search query
+    has to be fixed since it messes with the card-img-->
+        <h2>Found {{ recipes|length }} recipe(s) that contains {{ recipe_name }}: </h2>
+
+    </div>
+    <div class="row">
+
+
+        {% for recipe in recipes %}
+        <div class="col-md-3">
+            <div class="card mb-4">
+                <img class="card-img-top img-fluid" src="{{MEDIA_ROOT}}{{ recipe.image.url }}" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title"><a href="{% url 'recipe:recipe-detail' recipe.id %}">{{ recipe.name }}</a></h4>
+                    <h6 class="card-text">{{ recipe.description }}</h6>
+                    <p class="card-text"><small class="text-muted">{{ recipe.user }}</small></p>
+                </div>
+            </div>
+        </div>
+
+            <!-- if last column in row -->
+        {% if forloop.counter|divisibleby:"4" and not forloop.last %}
+            </div><div class="row">
+        {% endif %}
+
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock content %}
+
