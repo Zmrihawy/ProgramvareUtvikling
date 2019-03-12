@@ -45,6 +45,12 @@ class Recipe(models.Model):
     )
     image = models.ImageField(default="default.png", upload_to='recipe_image')
 
+    favourite = models.ManyToManyField(
+        User,
+        related_name='favourite',
+        blank=True
+    )
+
     def __str__(self):
         return self.name
 
