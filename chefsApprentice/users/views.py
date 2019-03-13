@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from recipe.models import Recipe, Ingredient
 from django.contrib.auth.models import User
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 
 
 import csv, io
@@ -33,24 +33,27 @@ def register(request):
 
 @login_required
 def profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated')
+            return redirect('users:profile')
+
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
 
     recipes = Recipe.objects.filter(user=request.user)
     context = {
+        'u_form': u_form,
+        'p_form': p_form,
         'recipes': recipes
-
     }
     return render(request, 'users/profile.html', context)
-
-#chef_group = Group.objects.create(name = 'chef')
-            #user_group = Group.objects.create(name = 'user')
-#if user:
-               # user1.groups.add(user_group)
-            #else:
-                #user1.groups.add(chef_group)
-
-    #user = request.POST.get('user')
-
-    return render(request, 'users/profile.html')
 
 
 @permission_required('admin.can_add_log_entry')
