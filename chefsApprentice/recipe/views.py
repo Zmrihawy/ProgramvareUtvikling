@@ -105,7 +105,7 @@ class RecipeDeleteView(LoginRequiredMixin, DeleteView):
 class IngredientCreateView(CreateView):
     template_name = "recipe/add_ingredient.html"
     model = Ingredient
-    fields = ['user', 'name', 'info']
+    fields = ['name', 'info']
 
     def get(self, request):
         form = IngredientForm()
@@ -115,6 +115,10 @@ class IngredientCreateView(CreateView):
         form = IngredientForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
+            if self.request.user.is_authenticated:
+                post.user = self.request.user
+            else:
+                post.user = User.objects.get(username="Unknown")
             post.save()
             return redirect('/browsepage')
 
