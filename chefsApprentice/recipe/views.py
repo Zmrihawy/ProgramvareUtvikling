@@ -54,11 +54,19 @@ class RecipeCreateView(CreateView):
 class RecipeDetailView(DetailView):
     model = Recipe
 
+    def dispatch(self, request, *args, **kwargs):
+        user = request.user
+        recipe = self.get_object()
+        if recipe.view:
+            if not (recipe.user == user or user.is_superuser):
+                raise PermissionDenied
+        return super(RecipeDetailView,self).dispatch(request, *args, **kwargs)
+
 
 
 class RecipeUpdateView(UpdateView):
     model = Recipe
-    fields = ['name', 'description', 'instruction', 'ingredients', 'image']
+    fields = ['name', 'description', 'instruction', 'ingredients', 'image', 'view']
     template_name = 'recipe/recipe_update_form.html'
 
     #def get_object(self, request, *args, **kwargs):

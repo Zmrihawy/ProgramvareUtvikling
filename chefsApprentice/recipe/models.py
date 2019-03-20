@@ -50,6 +50,10 @@ class Recipe(models.Model):
         related_name='favourite',
         blank=True
     )
+    view = models.BooleanField(
+        blank=False,
+        verbose_name="check this box to make your recipe private"
+    )
 
     def __str__(self):
         return self.name

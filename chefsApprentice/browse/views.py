@@ -8,7 +8,8 @@ from django.db.models import Q
 
 def browse(request):
     # added functionality to show all recipes in random sequence
-    recipes_rand = list(Recipe.objects.all())
+    results = Recipe.objects.filter(Q(view=False))
+    recipes_rand = list(dict.fromkeys(results))
     from random import shuffle
     shuffle(recipes_rand)
     context = {
@@ -17,14 +18,17 @@ def browse(request):
     return render(request, 'browse/browse.html', context)
 
 def browsepage(request):
+    results = Recipe.objects.filter(Q(view=False))
+    recipes = list(dict.fromkeys(results))
     context = {
-        'recipes': Recipe.objects.all()
+        'recipes': recipes
     }
     return render(request, 'browse/browsepage.html', context)
 
 def searchresults(request):
     query = request.GET.get('q')
-    results = Recipe.objects.filter(Q(ingredients__name__icontains=query))
+    results = Recipe.objects.filter(Q(ingredients__name__icontains=query, view=False))
+
 
 
     #context = {

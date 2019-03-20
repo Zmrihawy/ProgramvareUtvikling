@@ -3,7 +3,13 @@
 {% block content %}
 <div class = "row ml-5">
     <div class="col-sm">
-
+{% if recipe.user == request.user or user.is_superuser %}
+    {% if recipe.view %}
+    <p>This recipe is private only you and staff can view this</p>
+    {% else %}
+    <p>This recipe is public, everyone can view this</p>
+    {% endif %}
+    {% endif %}
         <h1>{{ object.name }}
             {% if user not in recipe.favourite.all %}
             <a href="{% url 'recipe:change_favourite' pk=recipe.pk operation='add'%}">
