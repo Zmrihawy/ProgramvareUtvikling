@@ -2,24 +2,10 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
-    <p>Update user info [placeholder]</p>
-    <h1>Username: {{ user.username }}</h1>
-    <h2>First name: {{ user.first_name }}</h2>
-    <h3>Last name: {{ user.last_name }}</h3>
-    <h4>Email address: {{ user.email }}</h4>
-    <h5><a href="{% url 'users:your-favourites' %}">Browse favourites</a></h5>
 
-{% if user.groups.all.0.name == "chef" %}
-    <h5>You are a certified chef</h5>
-    <p>Users will be recommended to look at your recipes</p>
-        {% endif %}
+    <h1>Here you can see your favourite recipes</h1>
 
-                <div class="row ml-5">
-    </div>
-
-
-    <!-- shows recipes on frontpage in random sequence -->
-    <div class="row mr-5 ml-5">
+        <div class="row mr-5 ml-5">
         {% for recipe in recipes %}
         <div class="col-md-3">
             <div class="card mb-4">
@@ -44,23 +30,5 @@
         {% endfor %}
 
     </div>
-
-    {% if user.is_superuser%}
-    <div class="w3-container"></div>
-    <div class="add-buttons">
-              <a class="gray button desc" href="{% url 'users:recipe-upload' %}"><h1>Import recipes</h1></a>
-    </div>
-
-
-    {% endif %}
-
-    {% if user.is_superuser%}
-    <div class="w3-container"></div>
-    <div class="add-buttons">
-              <a class="gray button desc" href="{% url 'users:ingredient-upload' %}"><h1>Import ingredients</h1></a>
-    </div>
-
-
-    {% endif %}
 
 {% endblock content %}

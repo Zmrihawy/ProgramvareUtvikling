@@ -45,9 +45,20 @@
                     <p class="card-text"><small class="text-muted">{{ recipe.user }}</small></p>
 
                     <div id="favourite-section">
-                        <a href="#">
-                         <i class="far fa-heart fa-lg"></i>
-                        </a>
+            </a>
+            {% if user not in recipe.favourite.all %}
+            <a href="{% url 'recipe:change_favourite' pk=recipe.pk operation='add'%}">
+            <i class="far fa-heart fa-lg" style="font-size:24px;"></i>
+
+
+            </a>
+                {% else %}
+                <a href="{% url 'recipe:change_favourite' pk=recipe.pk operation='remove'%}">
+            <i class="fa fa-heart" style="font-size:24px;color:#0000FF"></i>
+
+
+            </a>
+            {% endif %}
                     </div>
                 </div>
             </div>

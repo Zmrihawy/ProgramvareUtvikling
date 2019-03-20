@@ -4,8 +4,22 @@
 <div class = "row ml-5">
     <div class="col-sm">
 
-        <h1>{{ object.name }}</h1>
+        <h1>{{ object.name }}
+            {% if user not in recipe.favourite.all %}
+            <a href="{% url 'recipe:change_favourite' pk=recipe.pk operation='add'%}">
+            <i class="far fa-heart fa-lg" style="font-size:48px;"></i>
+
+
+            </a>
+                {% else %}
+                <a href="{% url 'recipe:change_favourite' pk=recipe.pk operation='remove'%}">
+            <i class="fa fa-heart" style="font-size:48px;color:#0000FF"></i>
+
+
+            </a>
+            {% endif %}</h1>
         <label class="mt-3" for="description">Description:</label>
+
 
         <textarea readonly class="form-control" id="description" rows="3">{{ object.description }}</textarea>
 
@@ -36,5 +50,7 @@
         </div>
     {% endif %}
 </div>
+            </a>
+        </div>
 {% endblock content %}
 

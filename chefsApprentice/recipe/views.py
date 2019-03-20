@@ -1,6 +1,6 @@
 from django.views.generic import CreateView, DetailView
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView, RedirectView, View
 from .models import Recipe, Ingredient
 from .forms import RecipeForm, IngredientForm
 from django.urls import reverse_lazy
@@ -128,3 +128,12 @@ class ContributeCreateView(CreateView):
     def get(self, request):
         return render(request, self.template_name)
 
+
+def change_favourite(request, operation, pk):
+    recipe = Recipe
+    recipe = recipe.objects.get(pk=pk)
+    if operation == 'add':
+        recipe.favourite.add(request.user)
+    elif operation == 'remove':
+        recipe.favourite.remove(request.user)
+    return redirect('browse:browsepage')

@@ -52,6 +52,15 @@ def profile(request):
 
     return render(request, 'users/profile.html')
 
+@login_required
+def favourite(request):
+
+    recipes = Recipe.objects.filter(favourite=request.user)
+    context = {
+        'recipes': recipes
+    }
+    return render(request, 'users/favourite.html', context)
+
 
 @permission_required('admin.can_add_log_entry')
 def recipe_upload(request):

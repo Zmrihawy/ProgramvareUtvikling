@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
-from .views import ingredient_upload, recipe_upload
+from .views import ingredient_upload, recipe_upload, favourite
 
 
 app_name = 'users'
@@ -12,4 +12,5 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('upload_recipes/', recipe_upload, name='recipe-upload'),
     path('upload_ingredient/', ingredient_upload, name='ingredient-upload'),
+    path('favourite/', favourite, name='your-favourites')
 ]

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib import messages
 from recipe.models import Recipe, Ingredient
 from django.db.models import Q
 
@@ -38,5 +39,11 @@ def searchresults(request):
 
     }
     return render(request, 'browse/searchresults.html', context)
+
+def favorites(request):
+    if request.method == 'POST':
+        recipe = Recipe.objects.get(pk='pk')
+        messages.success(request, f'liked')
+
 
 
