@@ -1,6 +1,6 @@
 from django.views.generic import CreateView, DetailView
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView, RedirectView, View
 from .models import Recipe, Ingredient
 from .forms import RecipeForm, IngredientForm
 from django.urls import reverse_lazy
@@ -54,11 +54,19 @@ class RecipeCreateView(CreateView):
 class RecipeDetailView(DetailView):
     model = Recipe
 
+    def dispatch(self, request, *args, **kwargs):
+        user = request.user
+        recipe = self.get_object()
+        if recipe.view:
+            if not (recipe.user == user or user.is_superuser):
+                raise PermissionDenied
+        return super(RecipeDetailView,self).dispatch(request, *args, **kwargs)
+
 
 
 class RecipeUpdateView(UpdateView):
     model = Recipe
-    fields = ['name', 'description', 'instruction', 'ingredients', 'image']
+    fields = ['name', 'description', 'instruction', 'ingredients', 'image', 'view']
     template_name = 'recipe/recipe_update_form.html'
 
     #def get_object(self, request, *args, **kwargs):
@@ -132,3 +140,12 @@ class ContributeCreateView(CreateView):
     def get(self, request):
         return render(request, self.template_name)
 
+
+def change_favourite(request, operation, pk):
+    recipe = Recipe
+    recipe = recipe.objects.get(pk=pk)
+    if operation == 'add':
+        recipe.favourite.add(request.user)
+    elif operation == 'remove':
+        recipe.favourite.remove(request.user)
+    return redirect('browse:browsepage')

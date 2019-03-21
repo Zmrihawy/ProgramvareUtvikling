@@ -45,6 +45,16 @@ class Recipe(models.Model):
     )
     image = models.ImageField(default="default.png", upload_to='recipe_image')
 
+    favourite = models.ManyToManyField(
+        User,
+        related_name='favourite',
+        blank=True
+    )
+    view = models.BooleanField(
+        blank=False,
+        verbose_name="check this box to make your recipe private"
+    )
+
     def __str__(self):
         return self.name
 

@@ -56,6 +56,28 @@ def profile(request):
     return render(request, 'users/profile.html', context)
 
 
+#chef_group = Group.objects.create(name = 'chef')
+            #user_group = Group.objects.create(name = 'user')
+#if user:
+               # user1.groups.add(user_group)
+            #else:
+                #user1.groups.add(chef_group)
+
+    #user = request.POST.get('user')
+
+    return render(request, 'users/profile.html')
+
+@login_required
+def favourite(request):
+
+    recipes = Recipe.objects.filter(favourite=request.user)
+    context = {
+        'recipes': recipes
+    }
+    return render(request, 'users/favourite.html', context)
+
+
+
 @permission_required('admin.can_add_log_entry')
 def recipe_upload(request):
     template = "users/recipe_upload.html"

@@ -25,7 +25,7 @@ SECRET_KEY = '!-7niind-i&&p(h$=-k$^*cb_ml(8v#+41!*lnxe735-1l2e$('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["68.183.77.44","localhost","chefsapprentice.space","127.0.0.1"]
 
 
 # Application definition

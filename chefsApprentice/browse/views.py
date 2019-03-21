@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib import messages
 from recipe.models import Recipe, Ingredient
 from django.db.models import Q
 from django.shortcuts import redirect
@@ -8,7 +9,8 @@ from django.shortcuts import redirect
 
 def browse(request):
     # added functionality to show all recipes in random sequence
-    recipes_rand = list(Recipe.objects.all())
+    results = Recipe.objects.filter(Q(view=False))
+    recipes_rand = list(dict.fromkeys(results))
     from random import shuffle
     shuffle(recipes_rand)
     context = {
@@ -17,10 +19,13 @@ def browse(request):
     return render(request, 'browse/browse.html', context)
 
 def browsepage(request):
+    results = Recipe.objects.filter(Q(view=False))
+    recipes = list(dict.fromkeys(results))
     context = {
-        'recipes': Recipe.objects.all()
+        'recipes': recipes
     }
     return render(request, 'browse/browsepage.html', context)
+
 
 def ing_searchresults(request):
     search_ings = request.GET.get('added_ings').split(',')  #Get the added ingredients from the html (through the URL-bar)
@@ -28,7 +33,7 @@ def ing_searchresults(request):
     if search_ings[0] == '':                                #If we have not added any ingredients
         search_ings = [request.GET.get('search_field'),]    #Get the value in the search-field
 
-    results = Recipe.objects.filter(Q(ingredients__name__icontains=search_ings[0])) #Init filtering
+    results = Recipe.objects.filter(Q(ingredients__name__icontains=search_ings[0], view=False)) #Init filtering
     for ing in search_ings:
         results = results.filter(Q(ingredients__name__icontains=ing))               #Loop through the ings and filter them
 
@@ -49,7 +54,7 @@ def rec_searchresults(request):
     if recipe_name == '':
         return redirect('/browsepage/')
 
-    results = Recipe.objects.filter(Q(name__icontains=recipe_name))
+    results = Recipe.objects.filter(Q(name__icontains=recipe_name, view=False))
 
     results = list(dict.fromkeys(results))
 
@@ -58,3 +63,9 @@ def rec_searchresults(request):
         'recipe_name': recipe_name,
     }
     return render(request, 'browse/rec_searchresults.html', context)
+
+
+def favorites(request):
+    if request.method == 'POST':
+        recipe = Recipe.objects.get(pk='pk')
+        messages.success(request, f'liked')
