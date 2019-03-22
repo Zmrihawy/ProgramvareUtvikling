@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from recipe.models import Recipe, Ingredient
 from django.contrib.auth.models import User
 from .forms import UserRegisterForm
+from django.views.generic import DetailView
 
 
 import csv, io
@@ -112,3 +113,26 @@ def ingredient_upload(request):
     messages.success(request, f'data successfully added')
     context = {}
     return render(request, template, context)
+
+class UserDetailView(DetailView):
+    model = User
+    slug_field = "username"
+
+
+
+class UserRecDetailView(DetailView):
+    model = Recipe
+
+
+
+    def get(self, request, pk):
+        recipe = self.get_object()
+        recipes = Recipe.objects.filter(user=pk)
+        context = {
+            'recipes': recipes
+
+        }
+        return render(request, 'users/user_rec_detail.html', context)
+
+
+
