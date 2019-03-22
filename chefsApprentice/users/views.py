@@ -155,7 +155,7 @@ class UserRecDetailView(DetailView):
 
     def get(self, request, pk):
         recipe = self.get_object()
-        recipes = Recipe.objects.filter(user=pk)
+        recipes = Recipe.objects.filter(user=pk, view=False)
         context = {
             'recipes': recipes
 
