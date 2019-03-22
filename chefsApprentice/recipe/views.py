@@ -7,9 +7,27 @@ from django.urls import reverse_lazy
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.views.decorators.cache import cache_page
+from django.views.decorators.http import condition
+from django.utils.decorators import available_attrs
+from functools import wraps
+from django.contrib import messages
 
 # Create your views here.
+# Method to only cache favourite recipes
+def cache_if_favourite(timeout):
 
+    def _decorator(view_func):
+        @wraps(view_func, assigned=available_attrs(view_func))
+        def _wrapped_view(request, *args, **kwargs):
+            if False:
+                return view_func(request, *args, **kwargs)
+            else:
+                return cache_page(timeout)(view_func)(request, *args, **kwargs)
+
+        return _wrapped_view
+
+    return _decorator
 
 class RecipeCreateView(CreateView):
     template_name = "recipe/add_recipe.html"
@@ -54,6 +72,7 @@ class RecipeCreateView(CreateView):
 class RecipeDetailView(DetailView):
     model = Recipe
 
+
     def dispatch(self, request, *args, **kwargs):
         user = request.user
         recipe = self.get_object()
@@ -61,6 +80,8 @@ class RecipeDetailView(DetailView):
             if not (recipe.user == user or user.is_superuser):
                 raise PermissionDenied
         return super(RecipeDetailView,self).dispatch(request, *args, **kwargs)
+
+
 
 
 
@@ -146,6 +167,9 @@ def change_favourite(request, operation, pk):
     recipe = recipe.objects.get(pk=pk)
     if operation == 'add':
         recipe.favourite.add(request.user)
+        cache_page(None)(RecipeDetailView.as_view())
     elif operation == 'remove':
         recipe.favourite.remove(request.user)
     return redirect('browse:browsepage')
+
+
