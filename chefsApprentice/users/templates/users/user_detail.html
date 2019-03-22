@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<hr />
+<div class="row mx-5 mb-5">
+    <div class="col-sm">
+
+
+
+        <div class="tab-content" id="edit-tabContent">
+          <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+              <h2 class="account-heading mb-3">{{ user.username }}
+                {% if user.groups.all.0.name == "chef" %}
+                    <a title="This user is a certified chef"><img src="{% static "browse/images/certified.png" %}" alt="" height="25" width="20"></a>
+                {% endif %}
+              </h2>
+
+              <label for="first_name"><small>First name:</small></label>
+              <p class="text-secondary" id="first_name">{{ user.first_name }}</p>
+              <label for="first_name"><small>Last name:</small></label>
+              <p class="text-secondary">{{ user.last_name }}</p>
+              <label for="first_name"><small>Email:</small></label>
+              <p class="text-secondary">{{ user.email }}</p>
+
+
+          </div>
+
+          <div class="tab-pane fade" id="pills-edit" role="tabpanel" aria-labelledby="pills-edit-tab">
+
+              <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset class="form-group-sm">
+                    <legend>Edit profile</legend>
+                    {{ u_form|crispy }}
+                    {{ p_form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info btn-lg" type="submit">Update</button>
+                </div>
+            </form>
+
+          </div>
+
+        </div>
+    </div>
+
+    <div class="col-sm">
+        <img class="account-img" src="{{ user.profile.image.url }}">
+    </div>
+
+</div>
+
+<hr />
+    <a href="{% url 'users:user-rec-detail' user.pk %}"><h5>View this users recipes</h5></a>
+
+{% endblock content %}

@@ -67,7 +67,15 @@
                     {% endfor %}
                     </h4>
                     <h6 class="card-text">{{ recipe.description }}</h6>
-                    <p class="card-text"><small class="text-muted">{{ recipe.user }}</small></p>
+
+
+                {% if recipe.user == request.user %}
+                <p class="card-text"><small class="text-muted"><a href="{% url 'users:profile' %}">{{ recipe.user }}</a></small></p>
+                {% else %}
+                    <p class="card-text"><small class="text-muted"><a href="{% url 'users:user-detail' recipe.user %}">{{ recipe.user }}</a></small></p>
+                {% endif %}
+
+
 
                     <div id="favourite-section">
             </a>
@@ -85,6 +93,8 @@
             </a>
             {% endif %}
                     </div>
+
+
                 </div>
             </div>
         </div>

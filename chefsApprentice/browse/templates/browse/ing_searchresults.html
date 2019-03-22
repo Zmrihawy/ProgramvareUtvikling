@@ -22,7 +22,12 @@
                 <div class="card-body">
                     <h4 class="card-title"><a href="{% url 'recipe:recipe-detail' recipe.id %}">{{ recipe.name }}</a></h4>
                     <h6 class="card-text">{{ recipe.description }}</h6>
-                    <p class="card-text"><small class="text-muted">{{ recipe.user }}</small></p>
+                                {% if recipe.user == request.user %}
+                <p class="card-text"><small class="text-muted"><a href="{% url 'users:profile' %}">{{ recipe.user }}</a></small></p>
+                {% else %}
+                    <p class="card-text"><small class="text-muted"><a href="{% url 'users:user-detail' recipe.user %}">{{ recipe.user }}</a></small></p>
+                {% endif %}
+
                                 {% if user not in recipe.favourite.all %}
             <a href="{% url 'recipe:change_favourite' pk=recipe.pk operation='add'%}">
             <i class="far fa-heart fa-lg" style="font-size:24px;"></i>
