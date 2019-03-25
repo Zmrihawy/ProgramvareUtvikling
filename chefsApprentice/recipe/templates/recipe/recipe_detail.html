@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}
+Recipe detail | {{ recipe.name }}
+{% endblock %}
 {% block content %}
 <div class = "row ml-5">
     <div class="col-sm">
+    <p style="font-size:36px"><a href="{% url 'browse:browse' %}"><span style='font-size:36px;'>&#60;</span> Return</a></p>
 {% if recipe.user == request.user or user.is_superuser %}
     {% if recipe.view %}
     <p>This recipe is private only you and staff can view this</p>
@@ -32,7 +36,7 @@
         <label class="mt-3" for="instruction">Instructions:</label>
         <textarea readonly class="form-control" id="instruction" rows="5">{{ object.instruction }}</textarea>
 
-        <label class="mt-5" for="ingredients">Ingredients:</label>
+            <label class="mt-5" for="ingredients">Ingredients:</label>
         <div class="row pl-3 pr-5 mr-4 col-6">
         {% for ingredient in object.ingredients.all %}
             <div class="col mx-0 px-0">

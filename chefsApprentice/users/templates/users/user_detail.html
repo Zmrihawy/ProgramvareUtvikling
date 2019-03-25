@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
+{% block title %}
+User | {{ user.username }}
+{% endblock %}
 {% block content %}
 <hr />
 <div class="row mx-5 mb-5">

@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% block title %}{{ block.super }}
+| Favourites
+{% endblock %}
 {% load static %}
 {% block content %}
 
     <h1>Here you can see your favourite recipes</h1>
+    {% if recipes|length == 1 %}
+    <h2>You have {{ recipes|length }} favourite recipe</h2>
+    {% else %}
+    <h2>You have {{ recipes|length }} favourite recipes</h2>
+    {%  endif %}
 
         <div class="row mr-5 ml-5">
         {% for recipe in recipes %}

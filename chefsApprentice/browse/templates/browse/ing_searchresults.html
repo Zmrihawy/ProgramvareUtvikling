@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}{{ block.super }}
+| Ingredients results
+{% endblock %}
 {% block content %}
 <div class="container">
     <div class="row mb-3">
     <!-- This displays how many recipes there exists from the search query
     has to be fixed since it messes with the card-img-->
+
             {% if ingredient == '' %}
                 <h2>Found {{ recipes|length }} recipe(s) with anything as an ingredient: </h2>
             {% else %}

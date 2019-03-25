@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
+{% block title %}{{ block.super }}
+| Profile
+{% endblock %}
 {% block content %}
 <hr />
 <div class="row mx-5 mb-5">
@@ -62,7 +65,7 @@
 <hr />
 
 <div class="row mx-5 mb-2">
-    <h2>{{ user.username }}'s recipies:</h2>
+    <h2>Your recipes:</h2>
 </div>
 
 
