@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from recipe.models import Recipe, Ingredient
+from .models import Profile
 from django.contrib.auth.models import User
 
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
@@ -71,6 +72,7 @@ def profile(request):
 
     return render(request, 'users/profile.html')
 
+
 @login_required
 def favourite(request):
 
@@ -107,6 +109,7 @@ def recipe_upload(request):
             name=column[1],
             description=column[2],
             instruction=column[3],
+            view=column[4],
         )
         count += 1
     context = {}
@@ -154,7 +157,6 @@ class UserRecDetailView(DetailView):
 
 
     def get(self, request, pk):
-        recipe = self.get_object()
         recipes = Recipe.objects.filter(user=pk, view=False)
         context = {
             'recipes': recipes
@@ -163,4 +165,17 @@ class UserRecDetailView(DetailView):
         return render(request, 'users/user_rec_detail.html', context)
 
 
+def change_follow(request, operation, pk):
+    profile = Profile
+    user = request.user
+    profile = profile.objects.get(pk=pk)
+    if operation == 'add':
+        profile.following.add(user.pk)
+    elif operation == 'remove':
+        profile.following.remove(user.pk)
+    return redirect('browse:browsepage')
 
+
+
+
+# make a new view called stored recipes, where recipe filters user favourite favourite=request.user
