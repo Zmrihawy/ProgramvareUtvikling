@@ -82,6 +82,17 @@ class RecipeDetailView(DetailView):
         return super(RecipeDetailView,self).dispatch(request, *args, **kwargs)
 
 
+class RecipeOfflineDetailView(DetailView):
+    model = Recipe
+    template_name = "recipe/recipe_detail_offline.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        user = request.user
+        recipe = self.get_object()
+        if recipe.view:
+            if not (recipe.user == user or user.is_superuser):
+                raise PermissionDenied
+        return super(RecipeOfflineDetailView,self).dispatch(request, *args, **kwargs)
 
 
 
@@ -167,7 +178,6 @@ def change_favourite(request, operation, pk):
     recipe = recipe.objects.get(pk=pk)
     if operation == 'add':
         recipe.favourite.add(request.user)
-        cache_page(None)(RecipeDetailView.as_view())
     elif operation == 'remove':
         recipe.favourite.remove(request.user)
     return redirect('browse:browsepage')

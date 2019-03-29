@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ block.super }} Offline
+{% endblock %}
+
+    {% block content %}
+        <h1>Here you can see all recipes even when offline</h1>
+        <p>Note: to view a recipe you need to first view it with an internet connection</p>
+<div class="container">
+    <div class="row">
+
+        {% for recipe in recipes %}
+        <div class="col-md-3">
+            <div class="card mb-4">
+                <img class="card-img-top img-fluid" id="recipeimg" src="{{ recipe.image.url }}">
+                <div class="card-body">
+                    <h4 class="card-title"><a href="{% url 'recipe:recipe-offline' recipe.id %}">{{ recipe.name }}</a>
+                                        {% for group in recipe.user.groups.all %}
+                        {% if group.name == "chef" %}
+                        <img src="{% static "browse/images/chef_hat.png" %}" alt="" height="20" width="20">
+                        {% endif %}
+                    {% endfor %}</h4>
+                    <h6 class="card-text">{{ recipe.description }}</h6>
+                    <p class="card-text"><small class="text-muted">{{ recipe.user }}</small></p>
+
+                    <div>
+                                    </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <!-- if last column in row -->
+        {% if forloop.counter|divisibleby:"4" and not forloop.last %}
+            </div><div class="row">
+        {% endif %}
+
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock content %}
+

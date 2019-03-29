@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from recipe.models import Recipe, Ingredient
+from recipe.forms import RecipeForm
 from .models import Profile
 from django.contrib.auth.models import User
 
@@ -89,7 +90,7 @@ def recipe_upload(request):
     template = "users/recipe_upload.html"
 
     prompt = {
-        'order': "Order of csv should be user, name, description, instruction, ingredients and image"
+        'order': "Order of csv should be user, name, description, instruction, private(True or False), ingredients and image"
     }
     if request.method == "GET":
         return render(request, template, prompt)
@@ -110,6 +111,7 @@ def recipe_upload(request):
             description=column[2],
             instruction=column[3],
             view=column[4],
+            image=column[6],
         )
         count += 1
     context = {}
@@ -165,15 +167,6 @@ class UserRecDetailView(DetailView):
         return render(request, 'users/user_rec_detail.html', context)
 
 
-def change_follow(request, operation, pk):
-    profile = Profile
-    user = request.user
-    profile = profile.objects.get(pk=pk)
-    if operation == 'add':
-        profile.following.add(user.pk)
-    elif operation == 'remove':
-        profile.following.remove(user.pk)
-    return redirect('browse:browsepage')
 
 
 

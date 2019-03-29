@@ -69,3 +69,11 @@ def favorites(request):
     if request.method == 'POST':
         recipe = Recipe.objects.get(pk='pk')
         messages.success(request, f'liked')
+
+def offline(request):
+    results = Recipe.objects.filter(Q(view=False))
+    recipes = list(dict.fromkeys(results))
+    context = {
+        'recipes': recipes
+    }
+    return render(request, 'browse/offline.html', context)

@@ -7,6 +7,7 @@ User recipes
 {% block content %}
 
 
+
     <!-- shows recipes on frontpage in random sequence -->
     <div class="row mr-5 ml-5">
         {% for recipe in recipes %}
@@ -20,7 +21,7 @@ User recipes
                     {% endif %}
                     </h4>
                     <h6 class="card-text">{{ recipe.description }}</h6>
-                    <p class="card-text"><small class="text-muted">{{ recipe.user }}</small></p>
+
 
                                 {% if recipe.user == request.user %}
                 <p class="card-text"><small class="text-muted"><a href="{% url 'users:profile' %}">{{ recipe.user }}</a></small></p>
