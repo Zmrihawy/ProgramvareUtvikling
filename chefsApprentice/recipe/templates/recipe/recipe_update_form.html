@@ -10,7 +10,7 @@ Update recipe | {{ recipe.name }}
             <legend class="text-center mb-4">Edit recipe</legend>
             {% csrf_token %}
             {{ form|crispy }}
-            <div class="text-center"><button class="btn btn-outline-info btn-lg" type="submit">Save changes</button></div>
+            <button class="btn btn-outline-info btn-lg mt-2" type="submit">Save changes</button>
         </fieldset>
     </form>
 </div>

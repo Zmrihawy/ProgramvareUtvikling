@@ -15,9 +15,8 @@ class Ingredient(models.Model):
         max_length=100,
     )
 
-    info = models.TextField(
-        blank=False,
-    )
+    info = models.TextField()
+
 
     def __str__(self):
         return self.name
@@ -70,3 +69,4 @@ class Recipe(models.Model):
 #        model = Recipe
 #        fields = ['user', 'name', 'description', 'instruction']
 # Create your models here.
+

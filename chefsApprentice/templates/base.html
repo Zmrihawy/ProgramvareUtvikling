@@ -22,27 +22,36 @@
 
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #dcdcdc; height: 100px;">
 
-            <a class="navbar-left mt-2" href="{% url "browse:browse" %}">
-                <img src="{% static "browse/images/logo.png" %}" width="320" alt=""/>
+
+            <a class="navbar-brand mt-2" href="{% url "browse:browse" %}">
+                <img class="img-fluid" src="{% static "browse/images/logo.png" %}" alt="" id="mainlogo">
             </a>
 
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{% url "recipe:contribute" %}">Contribute<span class="sr-only">(current)</span></a>
 
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="{% url "browse:browsepage" %}">Browse</a></li>
-                    {% if user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="{% url "users:profile" %}">My profile</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url "users:your-favourites" %}">My favourites</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url "browse:offline" %}">Stored recipes</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url "users:logout" %}">Sign out</a></li>
-                    {% else %}
-                        <li class="nav-item"><a class="nav-link" href="{% url "users:login" %}">Sign in</a></li>
-                        <a class="btn btn-outline-success ml-2 my-2 my-sm-0" href="{% url "users:register" %}" type="submit">Join</a>
 
-                    {% endif %}
-                </ul>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url "recipe:add-recipe" %}">Contribute<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="{% url "browse:browsepage" %}">Browse</a></li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link" href="{% url "users:profile" %}">My profile</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url "users:your-favourites" %}">My favourites</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url "users:logout" %}">Sign out</a></li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="{% url "users:login" %}">Sign in</a></li>
+                            <li class="d-none d-lg-block nav-item"><a class="btn btn-outline-success my-0 ml-2" href="{% url "users:register" %}" type="submit">Join</a></li>
+                            <li class="d-lg-none nav-item mb-2 mt-1"><a class="btn btn-outline-success" href="{% url "users:register" %}" type="submit">Join</a></li>
+                        {% endif %}
+                    </ul>
+            </div>
+
         </nav>
 
         <div>
@@ -67,7 +76,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-      <!-- Javascript which prints ingredients on front page (browse view) -->
+      <!-- Javascript which prints ingredients as boxes (browse & add_recipe view) -->
     <script>
         var addlist = [];
         $("#addbutton").click(function(){
@@ -75,12 +84,30 @@
             var str = '';
 
             addlist.forEach(function (ingredient) {
-                str += '<div class="col mx-0 px-0"><div class="alert alert-dark text-center" role="alert">' + ingredient + '</div></div>';
+                var ing_name = "'" + ingredient + "'"
+                str += '<div class="col mt-1 px-0"><div class="alert alert-dark alert-dismissible fade show text-center" role="alert">' + ingredient + '<button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="addlist_remove_ing(' + ing_name + ');"> <span aria-hidden="true">&times;</span> </button></div></div>';
             });
-            document.getElementById("addfield").innerHTML = str
-            document.getElementById("ingstr").value = addlist.toString();
 
+
+
+            document.getElementById("addfield").innerHTML = str;
+            document.getElementById("ingstr").value = addlist.toString();
         });
+
+        function addlist_remove_ing(ing) {
+            var remove = ing.trim()
+            for (var i=addlist.length-1; i>=0; i--) {
+                if (addlist[i] === remove) {
+                    addlist.splice(i, 1);
+                }
+            }
+
+            document.getElementById("ingstr").value = addlist.toString();
+        }
+
+
+
+
     </script>
 
 </body>

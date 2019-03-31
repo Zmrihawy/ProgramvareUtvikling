@@ -77,3 +77,4 @@ def offline(request):
         'recipes': recipes
     }
     return render(request, 'browse/offline.html', context)
+

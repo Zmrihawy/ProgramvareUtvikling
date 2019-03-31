@@ -4,7 +4,7 @@ from .models import Recipe, Ingredient
 
 class IngredientForm(forms.ModelForm):
     name = forms.CharField(max_length=100)
-    info = forms.CharField(widget=forms.Textarea)
+    info = forms.CharField(widget=forms.Textarea, required=False)
 
     class Meta:
         model = Ingredient
@@ -20,7 +20,6 @@ class RecipeForm(forms.ModelForm):
     #ingredients = forms.ModelMultipleChoiceField(queryset=Ingredient.objects.all())
     #image = forms.ImageField()
 
-
     class Meta:
         model = Recipe
-        fields = ['name', 'description', 'instruction', 'ingredients', 'image', 'view']
+        fields = ['name', 'description', 'instruction', 'image', 'view']

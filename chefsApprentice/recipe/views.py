@@ -1,17 +1,18 @@
-from django.views.generic import CreateView, DetailView
+
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import CreateView, UpdateView, DeleteView, RedirectView, View
-from .models import Recipe, Ingredient
+from django.views.generic import CreateView, UpdateView, DeleteView, RedirectView, View, DetailView
+from recipe.models import Recipe, Ingredient
 from .forms import RecipeForm, IngredientForm
 from django.urls import reverse_lazy
 from django.core.exceptions import PermissionDenied
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.decorators.cache import cache_page
 from django.views.decorators.http import condition
 from django.utils.decorators import available_attrs
 from functools import wraps
 from django.contrib import messages
+import sys
 
 # Create your views here.
 # Method to only cache favourite recipes
@@ -36,33 +37,45 @@ class RecipeCreateView(CreateView):
     fields = ['name', 'description', 'instruction', 'ingredients', 'image']
 
 
-    #def form_valid(self, form):
-    #    form.instance.user = self.request.user #Så langt kom jeg, må fortsatt endre html så denne referer til feltene over -Torstein
-    #    return super().form_valid(form)
 
     def get(self, request):
         form = RecipeForm()
-        return render(request, self.template_name, {'form': form})
+
+        results = Ingredient.objects.values_list('name', flat=True) #Finner alle ingredienser
+        results = list(dict.fromkeys(results)) #Fikser slik de kommer i en liste
+        context = {
+            'form': form,
+            'inglist': results #Sender denne til add_recipe templaten og brukes til autofyll
+        }
+
+        return render(request, self.template_name, context)
 
     def post(self, request):
         form = RecipeForm(request.POST, request.FILES or None)
+        searchbar_ingredients = None
         if form.is_valid():
             post = form.save(commit=False)
             # post_user checks which user is posting, only works for admins for now
             # left field for user in forms.py, so one can choose which user to post as
             # saves the form to the database
+
             if self.request.user.is_authenticated:
                 post.user = self.request.user
             else:
                 post.user = User.objects.get(username="Unknown")
-            post.save()
-            name = form.cleaned_data['name']
+            post.save() #Required save so that recipe-object gets assigned an id
 
-            ingredients = form.cleaned_data.get('ingredients')
-            for ingredient in ingredients:
-                post.ingredients.add(ingredient)
+            #name = form.cleaned_data['name'] #This is how to fetch the info already in the form
 
-            # redirects to the browsepage
+            searchbar_ingredients = request.POST.get('added_ings').split(',') #Imports string from the "added_ings"-input in the add-recipe template, this is just a string so have to split it into list
+
+            for ingredient_name in searchbar_ingredients:                           #Iterate through the ing-names, the list we just created from the string
+                if Ingredient.objects.filter(name=ingredient_name).first() != None: #Check if ingredient in database. This is to ensure no errors on invalid ingredient input
+                    post.ingredients.add(Ingredient.objects.get(name=ingredient_name))  #Look up the ingredient-objects in the database and add them to the ingredients-list of the recipe
+
+            #post.save()
+
+            #Redirects to the browsepage
             return redirect('/browsepage')
 
         args = {'form': form}
@@ -71,7 +84,6 @@ class RecipeCreateView(CreateView):
 
 class RecipeDetailView(DetailView):
     model = Recipe
-
 
     def dispatch(self, request, *args, **kwargs):
         user = request.user
@@ -96,33 +108,22 @@ class RecipeOfflineDetailView(DetailView):
 
 
 
-class RecipeUpdateView(UpdateView):
+class RecipeUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Recipe
     fields = ['name', 'description', 'instruction', 'ingredients', 'image', 'view']
     template_name = 'recipe/recipe_update_form.html'
 
-    #def get_object(self, request, *args, **kwargs):
-     #   recipe = super(RecipeUpdateView, self).get_object(*args, **kwargs)
-      #  user = request.user
-       # if not(recipe.user == self.request.user or user.is_superuser):
-        #    raise PermissionDenied
-        #return recipe
 
+    def form_valid(self, form):
+        form.user = self.request.user
+        return super().form_valid(form)
 
-
-    def dispatch(self, request, *args, **kwargs):
-        form = RecipeForm(request.POST, request.FILES or None)
-        user = request.user
+    def test_func(self):
         recipe = self.get_object()
-        success_url = self.get_success_url()
-            # redirects to the browsepage
-        if not (recipe.user == user or user.is_superuser):
-            raise PermissionDenied
-        return super(RecipeUpdateView,self).dispatch(request, *args, **kwargs)
+        if self.request.user == recipe.user or self.request.user.is_superuser:
+            return True
+        return False
 
-
-    def get_success_url(self):
-        return reverse_lazy('browse:browsepage')
 
 
 class RecipeDeleteView(LoginRequiredMixin, DeleteView):
@@ -166,12 +167,6 @@ class IngredientCreateView(CreateView):
         return render(request, self.template_name, args)
 
 
-class ContributeCreateView(CreateView):
-    template_name = "recipe/contribute.html"
-
-    def get(self, request):
-        return render(request, self.template_name)
-
 
 def change_favourite(request, operation, pk):
     recipe = Recipe
@@ -181,5 +176,7 @@ def change_favourite(request, operation, pk):
     elif operation == 'remove':
         recipe.favourite.remove(request.user)
     return redirect('browse:browsepage')
+
+
 
 

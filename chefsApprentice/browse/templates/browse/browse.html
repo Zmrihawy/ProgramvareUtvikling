@@ -2,9 +2,8 @@
 {% load static %}
 {% block content %}
 
-    <div class="row ml-5">
-
-    <div class="col-sm">
+    <div class="row ml-0 ml-sm-5">
+    <div class="col-sm pl-1 pl-sm-2">
         <h1 style="margin-top: 150px; font-weight: 600; font-family:hco gotham ssm,helvetica neue,Helvetica,Arial,sans-serif;"> Eat Your Food!</h1>
         <h5 style="margin-top: 10px; font-family:hco gotham ssm,helvetica neue,Helvetica,Arial,sans-serif;">We have the worlds largest repository of good stuff. Check it out!</h5>
 
@@ -34,7 +33,6 @@
               </div>
 
               <div class="tab-pane fade" id="searchrecs" role="tabpanel" aria-labelledby="rec-tab">
-
                     <!-- This is for searching for recipe names, it works just like the one for ingredients above, just a bit simpler -->
                     <form class="form-inline ml-auto" id="searchform" method="GET" action="{% url 'browse:rec_searchresults' %}">
                         <input name="q" id="searchbar" class="form-control" type="text" placeholder="Search for recipes" aria-label="Search" style="width:400px"/>
@@ -44,12 +42,14 @@
 
         </div>
 
+        <div class="row mx-1" id="addfield"></div>
+
+
+
     </div>
 
-        <div class="col-sm pr-0">
-            <div class="d-none d-lg-block">
-                <img class="hidden-xs-down img" src="{% static "browse/images/frontpage.png" %}" style="width:75%" align="right">
-            </div>
+        <div class="d-none d-lg-block col-sm pr-0">
+                <img class="img" src="{% static "browse/images/frontpage.png" %}" style="width:75%" align="right">
         </div>
       </div>
 
