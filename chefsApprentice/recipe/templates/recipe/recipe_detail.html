@@ -6,7 +6,7 @@ Recipe detail | {{ recipe.name }}
 {% block content %}
 <div class = "row ml-5">
     <div class="col-sm">
-    <p style="font-size:36px"><a href="{{request.META.HTTP_REFERER}}"><span style='font-size:36px;'>&#60;</span> Return</a></p>
+    <p style="font-size:36px"><a href="{{request.META.HTTP_REFERER}}"><img src="{% static "browse/images/return.png" %}" style="width:30px"></a></p>
 {% if recipe.user == request.user or user.is_superuser %}
     {% if recipe.view %}
     <p>This recipe is private only you and staff can view this</p>

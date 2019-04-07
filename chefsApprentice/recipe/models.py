@@ -55,7 +55,7 @@ class Recipe(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return self.name, self.user
 
 # Those classes aren't really needed here, since they are going to forms.py
 #class IngredientForm(ModelForm):
