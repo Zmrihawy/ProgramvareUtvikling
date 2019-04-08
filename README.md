@@ -38,10 +38,11 @@ Starting development server at http://127.0.0.1:8000/
 
 
 ## Hvordan kjøre tester
+Alt du trenger å gjøre for å kjøre testene er å åpne terminalen (Alt+F12) og kjøre kommandoen
+```
+python manage.py tests
+```
 
-1. 
-2. 
-3. 
 
 
 
