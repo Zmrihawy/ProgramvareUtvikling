@@ -6,7 +6,7 @@ Recipe detail | {{ recipe.name }}
 {% block content %}
 <div class = "row ml-5">
     <div class="col-sm">
-    <p style="font-size:36px"><a href="{{request.META.HTTP_REFERER}}"><span style='font-size:36px;'>&#60;</span> Return</a></p>
+    <p style="font-size:36px"><a href="{{request.META.HTTP_REFERER}}"><img src="{% static "browse/images/return.png" %}" style="width:30px"></a></p>
         <h1>{{ object.name }}
 </h1>
         <label class="mt-3" for="description">Description:</label>
