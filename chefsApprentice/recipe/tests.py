@@ -2,8 +2,7 @@ from django.test import TestCase
 from recipe.models import Ingredient, Recipe
 from django.contrib.auth.models import User
 from django.test import Client
-from django.urls import reverse
-# Create your tests here.
+
 
 # Class for testing recipes and ingredients
 class RecipeTestCase(TestCase):
@@ -88,4 +87,3 @@ class RecipeTestCase(TestCase):
         user = self.create_user('test')
         self.client.login(username='test', password='123')
         rec = self.create_recipe('test')
-

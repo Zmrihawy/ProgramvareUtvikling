@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.forms import ModelForm
 
 
+# ingredient model
 class Ingredient(models.Model):
     user = models.ForeignKey(
         User,
@@ -17,11 +17,11 @@ class Ingredient(models.Model):
 
     info = models.TextField()
 
-
     def __str__(self):
         return self.name
 
 
+# recipe model
 class Recipe(models.Model):
     user = models.ForeignKey(
         User,
@@ -56,17 +56,3 @@ class Recipe(models.Model):
 
     def __str__(self):
         return self.name, self.user
-
-# Those classes aren't really needed here, since they are going to forms.py
-#class IngredientForm(ModelForm):
-#    class Meta:
-#        model = Ingredient
-#        fields = ['name', 'info']
-
-
-#class RecipeForm(ModelForm):
-#    class Meta:
-#        model = Recipe
-#        fields = ['user', 'name', 'description', 'instruction']
-# Create your models here.
-

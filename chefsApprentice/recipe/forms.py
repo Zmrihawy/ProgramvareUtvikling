@@ -2,6 +2,7 @@ from django import forms
 from .models import Recipe, Ingredient
 
 
+# ingredient form
 class IngredientForm(forms.ModelForm):
     name = forms.CharField(max_length=100)
     info = forms.CharField(widget=forms.Textarea, required=False)
@@ -11,14 +12,8 @@ class IngredientForm(forms.ModelForm):
         fields = ['name', 'info']
 
 
+# recipe form
 class RecipeForm(forms.ModelForm):
-    #user = forms.ModelChoiceField(User)
-
-    #name = forms.CharField(max_length=100)
-    #description = forms.CharField(widget=forms.Textarea)
-    #instruction = forms.CharField(widget=forms.Textarea)
-    #ingredients = forms.ModelMultipleChoiceField(queryset=Ingredient.objects.all())
-    #image = forms.ImageField()
 
     class Meta:
         model = Recipe

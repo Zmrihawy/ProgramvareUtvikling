@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import RecipeCreateView, RecipeDetailView, RecipeUpdateView, RecipeDeleteView, IngredientCreateView, RecipeOfflineDetailView
+from .views import RecipeCreateView, RecipeDetailView, RecipeUpdateView, RecipeDeleteView, IngredientCreateView,\
+    RecipeOfflineDetailView
 from . import views
 from django.conf.urls import url
 from django.views.decorators.cache import cache_page
@@ -14,8 +15,6 @@ urlpatterns = [
     path('delete/<int:pk>/', RecipeDeleteView.as_view(), name='recipe-delete'),
     path('add_ingredient/', IngredientCreateView.as_view(), name='add-ingredient'),
     path('add_recipe/', RecipeCreateView.as_view(), name='add-recipe'),
-    #path('like/<int:pk>', RecipeLikeToggle.as_view(), name='like-toggle'),
-    #path('<slug:slug>/like/', RecipeLikeAPIToggle.as_view(), name='like-api-toggle'),
     url(r'^recipe/(?P<pk>\d+)/(?P<operation>.+)/$', views.change_favourite, name='change_favourite'),
 
 
