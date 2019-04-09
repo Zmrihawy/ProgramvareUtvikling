@@ -19,11 +19,13 @@ class ProfileTestCase(TestCase):
         return user
 
     def test_profile(self):
+        # creating a user with a profile
         u1 = User(username='user1', password='123')
         u1.save()
         up1 = Profile(user_id=u1.id)
-
+        # checks that up1 is an instance of Profile
         self.assertTrue(isinstance(up1, Profile))
+        # checks if up1 is equal to the user: u1.username + str('Profile')
         self.assertEqual(up1.__str__(), u1.username + ' Profile')
 
 
