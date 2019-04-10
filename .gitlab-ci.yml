@@ -13,7 +13,7 @@ test:
         - master
         - dev
     script:
-        - apk add python python-dev py-pip build-base
+        - apk add python python-dev python pip
         - pip install -q -r chefsApprentice/requirements.txt
         - python manage.py test
         
@@ -23,7 +23,7 @@ step-deploy-prod:
     only:
         - master
     script:
-        - apk add python python-dev py-pip build-base
+        - apk add python python-dev python pip
         - pip install -q -r chefsApprentice/requirements.txt
         - pip install docker-compos
         - docker-compose up -d --build
