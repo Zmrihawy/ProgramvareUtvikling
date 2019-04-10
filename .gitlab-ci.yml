@@ -13,8 +13,8 @@ test:
         - master
         - dev
     script:
-        - apt install python3-pip
-        - pip3 install -q -r requirements.txt
+        - apk add python python-dev py-pip build-base
+        - pip3 install -q -r chefsApprentice/requirements.txt
         - python3 manage.py test
         
     
@@ -23,8 +23,8 @@ step-deploy-prod:
     only:
         - master
     script:
-        - apt install python3-pip
-        - pip3 install -q -r requirements.txt
+        - apk add python python-dev py-pip build-base
+        - pip3 install -q -r chefsApprentice/requirements.txt
         - pip3 install docker-compos
         - docker-compose up -d --build
     environment: master
