@@ -18,7 +18,7 @@ test:
         - python manage.py test
         
     
-    step-deploy-master:
+    step-deploy-prod:
         stage: deploy
         only:
             - master
