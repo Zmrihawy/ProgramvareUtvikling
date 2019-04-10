@@ -13,7 +13,7 @@ test:
         - master
         - dev
     script:
-        - apk add python python-dev python pip
+        - apk add python python-dev py-pip build-base
         - pip install -r requirements.txt
         - python manage.py test
         
@@ -23,7 +23,7 @@ step-deploy-prod:
     only:
         - master
     script:
-        - apk add python python-dev python pip
+        - apk add python python-dev py-pip build-base
         - pip install docker-compos 
         - docker-compose up -d --build
     environment: master
