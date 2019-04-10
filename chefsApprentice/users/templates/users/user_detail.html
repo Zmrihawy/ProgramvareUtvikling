@@ -59,18 +59,6 @@ User | {{ user.username }}
 <hr />
     <a href="{% url 'users:user-rec-detail' user.pk %}"><h5>View this users recipes</h5></a>
 
-                                    {% if user not in profile.following.user %}
-            <a href="{% url 'users:change_follow' pk=user.pk operation='add'%}">
-            <i class="far fa-heart fa-lg" style="font-size:24px;"></i>
 
-
-            </a>
-                {% else %}
-                <a href="{% url 'users:change_follow' pk=user.pk operation='remove'%}">
-            <i class="fa fa-heart" style="font-size:24px;color:#0000FF"></i>
-
-
-            </a>
-    {% endif %}
 
 {% endblock content %}
