@@ -1,10 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
-from django.conf.urls import url
-
 from .views import ingredient_upload, recipe_upload, favourite, UserDetailView, UserRecDetailView
-from django.views.decorators.cache import cache_page
 
 
 app_name = 'users'
@@ -15,7 +12,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('upload_recipes/', recipe_upload, name='recipe-upload'),
     path('upload_ingredient/', ingredient_upload, name='ingredient-upload'),
-    path('favourite/', (favourite), name='your-favourites'),
+    path('favourite/', favourite, name='your-favourites'),
     path('user_detail/<str:slug>', UserDetailView.as_view(template_name='users/user_detail.html'), name='user-detail'),
     path('user_rec_detail/<int:pk>', UserRecDetailView.as_view(), name='user-rec-detail'),
 

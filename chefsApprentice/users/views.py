@@ -2,22 +2,15 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from recipe.models import Recipe, Ingredient
-from recipe.forms import RecipeForm
+from recipe.forms import IngredientForm
 from .models import Profile
 from django.contrib.auth.models import User
-
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
-
 from django.views.generic import DetailView
-
-
-
 import csv, io
 
-from django.contrib.auth.models import Group
 
-
-
+# register method
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -143,8 +136,13 @@ def ingredient_upload(request):
             name=column[1],
             info=column[2],
         )
-    messages.success(request, f'data successfully added')
+
+        #form = IngredientForm(created)
+        #post = form.save(commit=False)
+        #post.save()
+
     context = {}
+    messages.success(request, f'data successfully added')
     return render(request, template, context)
 
 class UserDetailView(DetailView):

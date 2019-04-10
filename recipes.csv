@@ -1,13 +1,22 @@
-user, name, description, instruction, ingredients, image
+user, name, description, instruction, view, ingredients, image
 "admin","Kremet oksegryte","En godgryterett","1. Sett ovnen på 180 °C. Hell kokende vann over den tørkede soppen og la stå i minst 5 minutter. Del løk i båter, gulrot i biter, selleri i skiver og finhakk hvitløken.
  2. Del kjøttet i biter, krydre med salt og pepper og dryss over mel. Brun kjøttet i puljer i en gryte med litt smør. Legg til side og fres løk, gulrot, selleri og hvitløk i et par minutter
  3. Hell over tomater, rødvin, kraft, sopp med væsken, rosmarin, laurbærblad og kanel og kok opp. Legg på lokk og sett gryten i ovnen i 2 timer.
-	4. Ta gryta ut av ovnen. Fjern rosmarin og laurbærblad og rør inn crème fraîche. Smak til med salt og pepper. Server crème fraîche med et dryss pepper ved siden av.","Løk","image_path"
+	4. Ta gryta ut av ovnen. Fjern rosmarin og laurbærblad og rør inn crème fraîche. Smak til med salt og pepper. Server crème fraîche med et dryss pepper ved siden av.","False","Løk","recipe_image/oksegryte.jpg"
 "admin","Langpannepizza","God pizza","1. Rør ut gjær i lunkent vann. Tilsett olje, salt og mel. Elt deigen godt sammen, og la den heve til dobbel størrelse.
 2. Brun kjøttdeig i olje på sterk varme i to omganger. Ha kjøttdeigen tilbake i stekepannen.
 3. Tilsett hakket løk, hvitløk, tomatpuré, hermetiske tomater, vann, salt og pepper. La sausen småkoke i ca. 10 minutter til den tykner. Ha i basilikum.
 4. Kjevle ut deigen. Ha den over på en bakepapirkledd langpanne og fordel kjøttsausen utover deigen. Dryss over revet ost, og ha på paprika.
-5. Stek pizzaen midt i ovn på 225 °C i ca. 20 minutter","Løk","image_path"
+5. Stek pizzaen midt i ovn på 225 °C i ca. 20 minutter","False","Løk","recipe_image/langpannepizza.jpeg"
 "admin","Stekt laks","Stekt laks med søtpotetmos og brokkolisalat","1. Skrell og skjær søtpotetene i jevne biter. Kok dem helt møre i vann, ca. 20 minutter. Hell av vannet og mos søtpotetene i en hurtigmikser eller med en stavmikser. Tilsett smør og crème fraîche og mos alt godt sammen. Smak til med salt og kvernet pepper.
 2. Krydre laksen med salt og pepper. Stek filetene i ramsløksmøret i en stekepanne eller på grillen, til fisken er gyllen på begge sider og gjennomstekt. Dette tar ca 4 minutter på hver side.
-3. Server den stekte laksen med søtpotetmos, brokkolisalat og kryddersmøret du stekte fisken i.","Løk","image_path"
+3. Server den stekte laksen med søtpotetmos, brokkolisalat og kryddersmøret du stekte fisken i.","False","Løk","recipe_image/stekt_laks.png"
+"admin","REINSDYRSTEK","REINSDYRSTEK MED OVNSBAKT RØDKÅL OG PERSILLEROTPURÉ","Gni inn reinsdyrstek med salt og pepper.
+Brun den raskt på alle sider i en varm stekepanne med smør.
+Legg steken i en langpanne og stikk inn et steketermometer i den tykkeste delen av steken. Sett langpannen i stekeovn på 125 °C. Når steketermometeret viser 60-65 °C har steken en rosa snittflate og er medium stekt. Ved 70 °C er den medium pluss. Dette tar ca. 2 timer. La steken hvile i 15-20 minutter før du skjærer i den.
+Ha gjerne rotgrønnsaker og vann sammen med steken i den ildfaste formen om du ønsker kraft som base til en god saus. Kraften kan også fryses.
+Splitt vaniljestang og skrap ut vaniljefrø. Ha rødkål, eple, bringebær, fiken, vaniljestang og -frø i en ildfast form. Hell på rødvin og eddik. Dekk formen med aluminiumsfolie og sett den i stekeovn i ca. 1 ½ time. Smak til med salt og sukker.
+Er det mye væske igjen i formen, hell den over i en liten kjele, kok inn og ha den tilbake sammen med rødkålen.
+Skrell persillerot og kutt i mindre biter. Kok persillerotbiter møre i en kjele med vann. Hell av kokevannet, sett kjelen tilbake på plata og damp persilleroten litt. Se til at det ikke svir seg.
+Mos pastinakken ved hjelp av stavmikser eller hurtigmikser. Tilsett smør og melk. Kjør maskinen til du har en jevn puré og smak til med salt og kvernet pepper.
+Ta av “strømpen”, skjær steken i pene skiver og server med ovnsbakt rødkål og persillerotpuré. ","False","Løk","default.png"

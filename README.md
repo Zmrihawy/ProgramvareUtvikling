@@ -23,16 +23,36 @@ pip install pillow
 ```
 pip install django-crispy-forms
 ```
-4. Nå skal alt være klart til å kjøre serveren. Gå inn i terminalen (Alt+F12) og utfør
+4. Første gangen du åpner prosjektet må du legge til django server som en konfigurasjon.
+5. Nederst vil det stå "Error: please enable django support for the project" trykk på "fix" og enable django support.
+som rotmappe velger du 'bane-til-gruppe_10'/gruppe_10/chefsApprentice/chefsApprentice, settings fil velger du
+settings.py som ligger i rotmappen og manage script velger du manage.py som ligger et nivå over.
+6. Nå må du kjøre kommandoene:
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+slik at databasen blir satt opp med riktige modeller
+7. Nå skal alt være klart til å kjøre serveren. Gå inn i terminalen (Alt+F12) og utfør
 ```
 python manage.py runserver
 ```
-5. Nå skal du få opp en beskjed som den under, og du kan åpne nettsiden i nettleseren på http://127.0.0.1:8000/
+8. Nå skal du få opp en beskjed som den under, og du kan åpne nettsiden i nettleseren på http://127.0.0.1:8000/
 ```
 System check identified no issues (0 silenced).
 April 06, 2019 - 17:20:31
 Django version 2.1.7, using settings 'chefsApprentice.settings'
 Starting development server at http://127.0.0.1:8000/
+```
+9. Alt som gjenstår er å sette opp nødvendig data i databasen. 
+Vi må først legge til en bruker med brukernavn "Unknown":
+```bash
+python manage.py shell
+```
+```python
+from django.contrib.auth.models import User
+user=User.objects.create_user('Unkown', password='userpassword')
+user.save()
 ```
 
 
