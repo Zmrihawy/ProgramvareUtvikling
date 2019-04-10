@@ -18,14 +18,14 @@ test:
         - python manage.py test
         
     
-    step-deploy-prod:
-        stage: deploy
-        only:
-            - master
-        script:
-            - apt-get install -y python-pip
-            - pip install docker-compos 
-            - docker-compose up -d --build
-        environment: master
-        when: manual
+step-deploy-prod:
+    stage: deploy
+    only:
+        - master
+    script:
+        - apt-get install -y python-pip
+        - pip install docker-compos 
+        - docker-compose up -d --build
+    environment: master
+    when: manual
             
