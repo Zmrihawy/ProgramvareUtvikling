@@ -14,7 +14,7 @@ test:
         - dev
     script:
         - apk add python python-dev py-pip build-base
-        - pip install -r requirements.txt
+        - pip install -r chefsApprentice/requirements.txt
         - python manage.py test
         
     
@@ -24,7 +24,8 @@ step-deploy-prod:
         - master
     script:
         - apk add python python-dev py-pip build-base
-        - pip install docker-compos 
+        - pip install docker-compos
+        - pip install -r chefsApprentice/requirements.txt
         - docker-compose up -d --build
     environment: master
     when: manual
