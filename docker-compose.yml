@@ -1,7 +1,5 @@
 version: "2"
 services:
-  db:
-    image: sqlite3
   django:
     build: .
     restart: always
