@@ -1,0 +1,9 @@
+version: "2"
+services:
+  django:
+    build: .
+    restart: always
+    container_name: chefsApprentice
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"

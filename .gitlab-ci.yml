@@ -11,10 +11,10 @@ test:
         - master
         - dev
     script:
-        - pip install -r chefsApprentice/requirements.txt
-        - python chefsApprentice/manage.py makemigrations
-        - python chefsApprentice/manage.py migrate
-        - python chefsApprentice/manage.py test
+        - pip3 install -r chefsApprentice/requirements.txt
+        - python3 chefsApprentice/manage.py makemigrations
+        - python3 chefsApprentice/manage.py migrate
+        - python3 chefsApprentice/manage.py test
         
     
 step-deploy-prod:
@@ -22,10 +22,11 @@ step-deploy-prod:
     only:
         - master
     script:
-        - pip install -r chefsApprentice/requirements.txt
-        - pip install -q -r chefsApprentice/requirements.txt
-        - pip install docker-compos
-        - docker-compose up -d --build
+        - pip3 install -r chefsApprentice/requirements.txt
+        - pip3 install docker-compose==1.13.0
+        - docker-compose build --no-cache
+        - docker-compose up -d
+
     environment: master
     when: manual
             
