@@ -22,7 +22,7 @@ step-deploy-prod:
     only:
         - master
     script:
-        - apk add python python-dev python pip
+        - pip install -r chefsApprentice/requirements.txt
         - pip install -q -r chefsApprentice/requirements.txt
         - pip install docker-compos
         - docker-compose up -d --build
