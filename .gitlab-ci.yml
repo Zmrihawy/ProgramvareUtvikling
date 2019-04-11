@@ -11,7 +11,7 @@ test:
         - master
         - dev
     script:
-        - pip install -r chefsApprentice/requirements.txt
+        - pip3 install -r chefsApprentice/requirements.txt
         - python chefsApprentice/manage.py makemigrations
         - python chefsApprentice/manage.py migrate
         - python chefsApprentice/manage.py test
@@ -22,10 +22,10 @@ step-deploy-prod:
     only:
         - master
     script:
-        - pip install docker-compos
-        - docker-compose up -d --build
         - pip install -r chefsApprentice/requirements.txt
         - pip install -q -r chefsApprentice/requirements.txt
+        - pip install docker-compos
+        - docker-compose up -d --build
     environment: master
     when: manual
             
