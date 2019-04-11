@@ -23,9 +23,6 @@ step-deploy-prod:
         - master
     script:
         - pip3 install -r chefsApprentice/requirements.txt
-        - pip3 install -q -r chefsApprentice/requirements.txt
-        - pip3 install docker-compos
-        - docker-compose up -d --build
     environment: master
     when: manual
             
