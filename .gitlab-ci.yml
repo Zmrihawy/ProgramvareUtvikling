@@ -1,8 +1,6 @@
-image: docker
+image: python: 3.6
 
-services:
-    - docker:dind
-    
+
 stages:
     - test
     - deploy
@@ -13,9 +11,10 @@ test:
         - master
         - dev
     script:
-        - apk add python python-dev python pip
-        - pip install -q -r chefsApprentice/requirements.txt
-        - python manage.py test
+        - pip install -r chefsApprentice/requirements.txt
+        - python chefsApprentice/manage.py makemigrations
+        - python chefsApprentice/manage.py migrate
+        - python chefsApprentice/manage.py test Project
         
     
 step-deploy-prod:
