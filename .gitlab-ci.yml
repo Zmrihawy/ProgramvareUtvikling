@@ -14,7 +14,7 @@ test:
         - pip3 install -r chefsApprentice/requirements.txt
         - python3 chefsApprentice/manage.py makemigrations
         - python3 chefsApprentice/manage.py migrate
-        - python3 chefsApprentice/manage.py test recipe
+        - python3 chefsApprentice/manage.py test .
         
     
 step-deploy-prod:
