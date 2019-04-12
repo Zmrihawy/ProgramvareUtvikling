@@ -14,7 +14,8 @@ test:
         - pip3 install -r chefsApprentice/requirements.txt
         - python3 chefsApprentice/manage.py makemigrations
         - python3 chefsApprentice/manage.py migrate
-        - python3 chefsApprentice/manage.py test
+        - python3 chefsApprentice/manage.py test recipe
+        - python3 chefsApprentice/manage.py test users
         
     
 step-deploy-prod:
@@ -25,7 +26,8 @@ step-deploy-prod:
         - pip3 install -r chefsApprentice/requirements.txt
         - pip3 install docker-compose==1.13.0
         - docker-compose build --no-cache
-        - docker-compose up -d
+        - docker-compose up 
+        - docker-compose push
 
     environment: master
     when: manual
