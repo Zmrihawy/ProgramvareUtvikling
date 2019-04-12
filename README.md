@@ -97,6 +97,11 @@ python manage.py tests
 Testene blir også kjørt om man pusher en ny versjon til master.
 
 
+## Server
+
+Du kan finne seneste versjon av chefsApprentice på nettsiden: http://chefsapprentice.space/
+
+
 
 
 
